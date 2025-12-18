@@ -1,27 +1,15 @@
 // background.js (MV3 service worker)
 
-// Backend base URL – adjust if your API base changes
 const API_BASE_URL = "http://localhost:4000/api/v1";
 
-/**
- * Helper to send extension event data to backend.
- * For now this just uses a hard-coded sessionId = 1.
- * Later you can wire this to a real session from the frontend.
- */
 async function sendExtensionEvent({ sessionId, url, steps }) {
   try {
-    const payload = {
-      sessionId,
-      url,
-      steps
-    };
+    const payload = { sessionId, url, steps };
 
     const response = await fetch(`${API_BASE_URL}/extension-events`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
     });
 
     if (!response.ok) {
@@ -36,22 +24,25 @@ async function sendExtensionEvent({ sessionId, url, steps }) {
   }
 }
 
-/**
- * When the user clicks the extension icon:
- * - Use the active tab.
- * - Send its URL with some dummy steps to the backend.
- */
 chrome.action.onClicked.addListener(async (tab) => {
   try {
     const url = tab.url || "";
-    const sessionId = 1; // TODO: later wire this to a real session
+
+    // Extract sessionId from URLs like http://localhost:3000/sessions/2
+    const match = url.match(/\/sessions\/(\d+)/);
+    const sessionId = match ? Number(match[1]) : null;
+
+    if (!sessionId) {
+      console.warn("No sessionId found in URL; not sending event.", url);
+      return;
+    }
 
     const steps = [
       {
         type: "info",
         message: "Dummy step from extension click",
-        timestamp: new Date().toISOString()
-      }
+        timestamp: new Date().toISOString(),
+      },
     ];
 
     console.log("Clueso Clone Extension clicked on tab:", { url, sessionId });
