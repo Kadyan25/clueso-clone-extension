@@ -1,19 +1,21 @@
 {
   "manifest_version": 3,
   "name": "Clueso Clone Extension",
-  "description": "Minimal Clueso-style recorder that sends page context to the Clueso clone backend.",
   "version": "0.1.0",
   "action": {
     "default_title": "Send page to Clueso Clone"
   },
-  "permissions": [
-    "activeTab"
-  ],
-  "host_permissions": [
-    "http://localhost:4000/*"
-  ],
+  "permissions": ["activeTab", "storage"],
+  "host_permissions": ["http://localhost:4000/*"],
   "background": {
     "service_worker": "background.js",
     "type": "module"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://localhost:3000/*"],
+      "js": ["content-script.js"],
+      "run_at": "document_start"
+    }
+  ]
 }
