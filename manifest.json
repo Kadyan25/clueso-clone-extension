@@ -3,8 +3,10 @@
   "name": "Clueso Clone Extension",
   "version": "0.1.0",
   "action": {
-    "default_title": "Send page to Clueso Clone"
-  },
+  "default_title": "Clueso Clone Extension",
+  "default_popup": "popup.html"
+}
+,
   "permissions": ["activeTab", "storage"],
   "host_permissions": ["http://localhost:4000/*"],
   "background": {

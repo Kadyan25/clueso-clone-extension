@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Clueso Clone</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 16px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: #020617;
+        color: #e5e7eb;
+        width: 320px;
+        box-sizing: border-box;
+      }
+      h2 {
+        margin: 0 0 8px;
+        font-size: 16px;
+      }
+      p {
+        margin: 0 0 8px;
+        font-size: 13px;
+        color: #9ca3af;
+      }
+      button {
+        padding: 8px 12px;
+        font-size: 13px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        background: #2563eb;
+        color: white;
+        font-weight: 500;
+      }
+      button:disabled {
+        opacity: 0.6;
+        cursor: default;
+      }
+      small {
+        display: block;
+        margin-top: 10px;
+        font-size: 11px;
+        color: #9ca3af;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Clueso Recorder</h2>
+    <p>
+      Open any page you want to capture, then click the button below. A Clueso
+      session will be created and opened in the web app.
+    </p>
+
+    <button id="startBtn">Start Recording</button>
+
+    <small id="status">Idle</small>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
